@@ -13,7 +13,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { timeStamp } from 'console';
 import { CreateFilmDTO } from './dto/CreateFilm.dto';
 import { UpdateFilmDTO } from './dto/UpdateFilm.dto';
 import { FilmsService } from './films.service';
