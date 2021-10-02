@@ -1,4 +1,4 @@
-import { Filme } from '.prisma/client';
+import { Filme, Prisma } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateFilmDTO } from './dto/CreateFilm.dto';
@@ -11,7 +11,11 @@ export class FilmsService {
     return await this.prisma.filme.findMany();
   }
 
-  async create(film: CreateFilmDTO): Promise<Filme> {
-    return await this.prisma.filme.create({ data: film });
+  async create(data: CreateFilmDTO): Promise<Filme> {
+    return await this.prisma.filme.create({ data });
+  }
+
+  async update(id: number, data: Prisma.FilmeCreateInput): Promise<Filme> {
+    return await this.prisma.filme.update({ data, where: { id } });
   }
 }

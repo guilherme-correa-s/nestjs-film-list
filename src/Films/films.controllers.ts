@@ -1,5 +1,6 @@
 import { Filme } from '.prisma/client';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { timeStamp } from 'console';
 import { CreateFilmDTO } from './dto/CreateFilm.dto';
 import { FilmsService } from './films.service';
 
@@ -13,7 +14,12 @@ export class FilmsController {
   }
 
   @Post()
-  async create(@Body() createFilm: CreateFilmDTO): Promise<Filme> {
-    return this.filmService.create(createFilm);
+  async create(@Body() data: CreateFilmDTO): Promise<Filme> {
+    return this.filmService.create(data);
+  }
+
+  @Put('/:id')
+  async update(@Param('id') id: number, @Body() data: CreateFilmDTO) {
+    return this.filmService.update(id, data);
   }
 }
