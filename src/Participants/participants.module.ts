@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/prisma/prisma.module';
+import { ParticipantsController } from './participants.controller';
 import { ParticipantsService } from './participants.service';
 
 @Module({
@@ -7,4 +8,4 @@ import { ParticipantsService } from './participants.service';
   controllers: [ParticipantsController],
   providers: [ParticipantsService],
 })
-export class ParticipantsController {}
+export class ParticipantsModule {}

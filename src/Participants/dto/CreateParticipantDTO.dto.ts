@@ -1,4 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
+enum Role {
+  ACTOR,
+  STAFF,
+}
 
 export class CreateParticipantDTO {
   @IsNotEmpty()
@@ -8,5 +12,5 @@ export class CreateParticipantDTO {
   @IsNotEmpty()
   birth_day: string;
   @IsNotEmpty()
-  role: boolean;
+  role: Role;
 }

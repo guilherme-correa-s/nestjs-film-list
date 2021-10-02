@@ -8,4 +8,8 @@ export class ParticipantsService {
   async getAll() {
     return await this.prismaService.participants.findMany();
   }
+
+  async create(data) {
+    return await this.prismaService.participants.create({ data });
+  }
 }
