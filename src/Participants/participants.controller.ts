@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -34,5 +37,12 @@ export class ParticipantsController {
     @Param('id', ParseIntPipe) id: number,
   ) {
     return await this.participantsService.update(data, id);
+  }
+
+  @Delete('/:id')
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return await this.participantsService.delete(id);
   }
 }
