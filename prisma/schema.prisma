@@ -31,6 +31,11 @@ model Participants {
   name       String
   imagem     String
   birth_date String
-  role       Boolean
+  role       Role @default(ACTOR)
   file       Filme[]
+}
+
+enum Role {
+  ACTOR
+  STAFF
 }
