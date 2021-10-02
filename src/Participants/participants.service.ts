@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateParticipantDTO } from './dto/CreateParticipantDTO.dto';
 
 @Injectable()
 export class ParticipantsService {
@@ -9,7 +10,7 @@ export class ParticipantsService {
     return await this.prismaService.participants.findMany();
   }
 
-  async create(data) {
+  async create(data: CreateParticipantDTO) {
     return await this.prismaService.participants.create({ data });
   }
 }
