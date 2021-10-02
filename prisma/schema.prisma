@@ -12,9 +12,9 @@ generator client {
 
 model Filme {
   id           Int            @id @default(autoincrement())
-  name         DateTime       @default(now())
+  name         String 
   imagem       String?
-  release_date DateTime
+  release_date String
   duration     String
   genre        Genre[]
   participants Participants[]
