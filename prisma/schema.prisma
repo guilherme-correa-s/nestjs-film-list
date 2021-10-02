@@ -30,7 +30,7 @@ model Participants {
   id         Int      @id @default(autoincrement())
   name       String
   imagem     String
-  birth_date DateTime
+  birth_date String
   role       Boolean
   file       Filme[]
 }
