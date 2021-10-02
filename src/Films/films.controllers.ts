@@ -2,7 +2,10 @@ import { Filme } from '.prisma/client';
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -36,5 +39,12 @@ export class FilmsController {
     @Body() data: UpdateFilmDTO,
   ) {
     return this.filmService.update(id, data);
+  }
+
+  @Delete('/:id')
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return this.filmService.delete(id);
   }
 }

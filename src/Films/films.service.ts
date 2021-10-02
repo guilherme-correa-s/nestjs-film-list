@@ -19,4 +19,8 @@ export class FilmsService {
   async update(id: number, data: UpdateFilmDTO): Promise<Filme> {
     return await this.prisma.filme.update({ data, where: { id } });
   }
+
+  async delete(id: number) {
+    return await this.prisma.filme.delete({ where: { id } });
+  }
 }
