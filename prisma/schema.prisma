@@ -12,7 +12,7 @@ generator client {
 
 model Filme {
   id           Int            @id @default(autoincrement())
-  name         String 
+  name         String
   imagem       String?
   release_date String
   duration     String
@@ -21,17 +21,17 @@ model Filme {
 }
 
 model Genre {
-  id    Int     @id @default(autoincrement())
-  name  String
-  filme Filme[]
+  id          Int     @id @default(autoincrement())
+  movie_genre String
+  filme       Filme[]
 }
 
 model Participants {
-  id         Int      @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   name       String
   imagem     String
   birth_date String
-  role       Role @default(ACTOR)
+  role       Role    @default(ACTOR)
   file       Filme[]
 }
 
