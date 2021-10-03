@@ -9,11 +9,14 @@ export class FilmsService {
   constructor(private prisma: PrismaService) {}
 
   async getAll(): Promise<Filme[]> {
-    return await this.prisma.filme.findMany({ include: { genre: true } });
+    return await this.prisma.filme.findMany({
+      include: { genre: true, participants: true },
+    });
   }
 
   async create(data: CreateFilmDTO): Promise<Filme> {
     const conectGenres = [];
+    const conectParticipants = [];
 
     await Promise.all(
       data.movie_genre.map(async (item) => {
@@ -21,6 +24,15 @@ export class FilmsService {
           where: { movie_genre: String(item) },
         });
         if (exist) conectGenres.push({ movie_genre: item });
+      }),
+    );
+
+    await Promise.all(
+      data.participants.map(async (participant) => {
+        const exist = await this.prisma.participants.findUnique({
+          where: { id: Number(participant) },
+        });
+        if (exist) conectParticipants.push({ id: participant });
       }),
     );
 
@@ -35,30 +47,19 @@ export class FilmsService {
       data: {
         ...film,
         genre: { connect: conectGenres },
+        participants: { connect: conectParticipants },
       },
-      include: { genre: true },
+      include: { genre: true, participants: true },
     });
   }
 
   async update(id: number, data: UpdateFilmDTO): Promise<Filme> {
-    const conectGenres = [];
-
-    await Promise.all(
-      data.movie_genre.map(async (item) => {
-        const exist = await this.prisma.genre.findUnique({
-          where: { movie_genre: String(item) },
-        });
-        if (exist) conectGenres.push({ movie_genre: item });
-      }),
-    );
-
     const film = {
       name: data.name,
       imagem: data.imagem,
       release_date: data.release_date,
       duration: data.duration,
     };
-    console.log(film);
     return await this.prisma.filme.update({ data: { ...film }, where: { id } });
   }
 
