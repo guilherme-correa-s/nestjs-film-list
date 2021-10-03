@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { CreateGenreDTO } from 'src/Genres/dto/CreateGenreDTO.dto';
 
 export class CreateFilmDTO {
   @IsNotEmpty()
@@ -13,4 +14,6 @@ export class CreateFilmDTO {
   @IsNotEmpty()
   @IsString()
   duration: string;
+  @IsNotEmpty()
+  movie_genre: CreateGenreDTO[];
 }

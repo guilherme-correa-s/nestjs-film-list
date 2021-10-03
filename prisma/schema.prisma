@@ -22,7 +22,7 @@ model Filme {
 
 model Genre {
   id          Int     @id @default(autoincrement())
-  movie_genre String
+  movie_genre String  @unique
   filme       Filme[]
 }
 
